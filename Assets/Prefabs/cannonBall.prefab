@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1483525473811641747}
   - component: {fileID: 1483525473811641740}
   - component: {fileID: 6256044291653907131}
+  - component: {fileID: 5593339897517686060}
   m_Layer: 0
   m_Name: cannonBall
   m_TagString: Untagged
@@ -98,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0b23c6c0685404eb825ca249ad0479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TTL: 10
   MIN_DEPTH: -5
 --- !u!54 &1483525473811641740
 Rigidbody:
@@ -158,7 +158,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.25
+  m_Time: 0.35
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -175,7 +175,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.74503815
+        time: 1
         value: 0
         inSlope: -0.8591822
         outSlope: -0.8591822
@@ -224,3 +224,16 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!135 &5593339897517686060
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483525473814899085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}

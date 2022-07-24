@@ -6,12 +6,12 @@ public class BasicProjectile : MonoBehaviour
 {
 
     // Destroy after ball has lived this long
-    [SerializeField] private float TTL;
+    [SerializeField] private float? TTL;
 
     // Destroy after ball has sunk below this line
     [SerializeField] private float MIN_DEPTH = -5;
 
-    private float? createdAt;
+    private float createdAt;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class BasicProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (createdAt != null)
+        if (TTL != null)
         {
             if (Time.time - createdAt >= TTL)
             {
@@ -37,4 +37,15 @@ public class BasicProjectile : MonoBehaviour
     }
 
     // TODO: On colliding with enemy ship, deal damage
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+
+        } else if (collision.gameObject.CompareTag("Water"))
+        {
+            EffectsManager.Instance.SplashAt(collision.transform.position);
+            Destroy(gameObject);
+        }
+    }
 }
