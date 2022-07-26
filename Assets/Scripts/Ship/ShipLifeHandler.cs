@@ -22,7 +22,7 @@ public class ShipLifeHandler : MonoBehaviour
         return math.sin(math.clamp(speed, 1, max)/15.9f) * max;
     }
     
-    void OnTriggerEnter(Collision collision) {
+    void OnTriggerEnter(Collider collision) {
         if (collidableTags.Contains(collision.gameObject.tag))
             life -= (int)CollisionDamageCalculator(2, 25);
     }
