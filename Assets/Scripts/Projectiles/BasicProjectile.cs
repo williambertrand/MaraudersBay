@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BasicProjectile : MonoBehaviour
@@ -10,7 +12,10 @@ public class BasicProjectile : MonoBehaviour
 
     // Destroy after ball has sunk below this line
     [SerializeField] private float MIN_DEPTH = -5;
-
+    
+    [SerializeField] private int Damage = 25;
+    [SerializeField] string[] validTargets;
+    
     private float createdAt;
 
     // Start is called before the first frame update
@@ -47,5 +52,17 @@ public class BasicProjectile : MonoBehaviour
             EffectsManager.Instance.SplashAt(collision.transform.position);
             Destroy(gameObject);
         }
+    }
+
+    void OnTriggerEnter(Collider collision) {
+        if (!validTargets.Contains(collision.gameObject.tag))
+            return;
+        
+        ShipLifeHandler lifeHandler = collision.gameObject.GetComponent<ShipLifeHandler>();
+        
+        if (lifeHandler == null)
+            return;
+        
+        lifeHandler.ApplyDamage(Damage);
     }
 }

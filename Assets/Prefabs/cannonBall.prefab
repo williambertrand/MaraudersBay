@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MIN_DEPTH: -5
+  Damage: 25
+  validTargets:
+  - Ship
+  - Player
 --- !u!54 &1483525473811641740
 Rigidbody:
   m_ObjectHideFlags: 0
