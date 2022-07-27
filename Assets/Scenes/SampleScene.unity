@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1143062, y: 1}
+    m_SensorSize: {x: 2.271028, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -185,7 +185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80439291}
-  m_LocalRotation: {x: 0.000000007382116, y: 0.90328854, z: -0.42903358, w: 0.00000001554233}
+  m_LocalRotation: {x: -0.000000007382114, y: 0.90328854, z: -0.42903358, w: -0.000000015542325}
   m_LocalPosition: {x: 57, y: 147.2, z: 218.99997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -383,7 +383,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.000000007382116, y: 0.90328854, z: -0.42903358, w: 0.00000001554233}
+  m_LocalRotation: {x: -0.000000007382114, y: 0.90328854, z: -0.42903358, w: -0.000000015542325}
   m_LocalPosition: {x: 57, y: 147.2, z: 218.99997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1044,9 +1044,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440f5e7b4d266aa478264faa0eb920ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
+  _life: 100
+  defaultLife: 100
   isInvincible: 0
   collidableTags: []
+  spawnLocations:
+  - {fileID: 1988653860}
 --- !u!65 &593384740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2256,6 +2259,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: affd384383b317c4fbe632f9c7e36efb, type: 3}
+--- !u!1 &1988653860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: affd384383b317c4fbe632f9c7e36efb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1988653859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2015994564
 PrefabInstance:
   m_ObjectHideFlags: 0
