@@ -49,7 +49,8 @@ public class BasicProjectile : MonoBehaviour
 
         } else if (collision.gameObject.CompareTag("Water"))
         {
-            EffectsManager.Instance.SplashAt(collision.transform.position);
+            ContactPoint contact = collision.contacts[0];
+            EffectsManager.Instance.SplashAt(contact.point);
             Destroy(gameObject);
         }
     }
