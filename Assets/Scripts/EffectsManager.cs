@@ -29,7 +29,7 @@ public class EffectsManager : MonoBehaviour
 
     public void SplashAt(Vector3 pos)
     {
-        GameObject splash =Instantiate(SplashEffect, pos, Quaternion.identity);
+        GameObject splash = Instantiate(SplashEffect, pos, Quaternion.identity);
         splash.GetComponent<ParticleSystem>().Play();
     }
 }
