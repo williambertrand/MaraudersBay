@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AiPatrol : MonoBehaviour
+public class AiMoveAndShoot : MonoBehaviour
 {
     private Vector3 sailPoint;
     public float speed = 10f;
@@ -16,6 +16,7 @@ public class AiPatrol : MonoBehaviour
     public float attackRange = 12f;
 
     public ShipFiring shipFiring;
+    // public ShipLifeHandler shipLifeHandler;
     public float timeBetweenAttacks = 2f;
     bool alreadyAttacked;
 

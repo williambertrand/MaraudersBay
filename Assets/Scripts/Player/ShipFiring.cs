@@ -45,6 +45,8 @@ public class ShipFiring : MonoBehaviour
 
         GameObject proj = Instantiate(projectile, initPoint.position, Quaternion.identity);
 
+        proj.gameObject.tag = gameObject.tag;
+
         Rigidbody rb = proj.GetComponent<Rigidbody>();
 
 

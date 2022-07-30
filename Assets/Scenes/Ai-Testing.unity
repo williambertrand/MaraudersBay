@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 7944362}
   - component: {fileID: 7944361}
   - component: {fileID: 7944365}
+  - component: {fileID: 7944366}
   m_Layer: 0
   m_Name: EnemyShip
   m_TagString: Enemy
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  sailPointRange: 50
+  sailPointRange: 100
   RotationSpeed: 1
   sightRange: 20
   attackRange: 12
@@ -228,6 +229,24 @@ MonoBehaviour:
   firingPower: 4000
   reloadTime: 0.25
   accuracyValue: 0.025
+--- !u!114 &7944366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440f5e7b4d266aa478264faa0eb920ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _life: 100
+  defaultLife: 100
+  isInvincible: 0
+  collidableTags: []
+  spawnLocations:
+  - {fileID: 2112159661}
 --- !u!1 &80439291
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80439291}
-  m_LocalRotation: {x: 0.000000007382116, y: 0.90328854, z: -0.42903358, w: 0.00000001554233}
+  m_LocalRotation: {x: -0.000000007382114, y: 0.90328854, z: -0.42903358, w: -0.000000015542325}
   m_LocalPosition: {x: 57, y: 147.2, z: 218.99997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -488,7 +507,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.000000007382116, y: 0.90328854, z: -0.42903358, w: 0.00000001554233}
+  m_LocalRotation: {x: -0.000000007382114, y: 0.90328854, z: -0.42903358, w: -0.000000015542325}
   m_LocalPosition: {x: 57, y: 147.2, z: 218.99997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2735,6 +2754,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8,
     type: 3}
   m_PrefabInstance: {fileID: 2015994564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2112159661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: beca96187d33b6d4f9bcbf420499a905,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617111700}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1770769807334759482
 PrefabInstance:
