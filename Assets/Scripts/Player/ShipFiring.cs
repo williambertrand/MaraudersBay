@@ -27,16 +27,16 @@ public class ShipFiring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void FireCannon()
+    public void FireCannon()
     {
 
         if (Time.time - lastFireTime <= reloadTime) return;
@@ -44,6 +44,8 @@ public class ShipFiring : MonoBehaviour
         Transform initPoint = toFireSide == Side.PORT ? PORT_Firing : STARBOARD_Firing;
 
         GameObject proj = Instantiate(projectile, initPoint.position, Quaternion.identity);
+
+        proj.gameObject.tag = gameObject.tag;
 
         Rigidbody rb = proj.GetComponent<Rigidbody>();
 
@@ -67,7 +69,7 @@ public class ShipFiring : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {
 
-        switch(context.phase)
+        switch (context.phase)
         {
             case InputActionPhase.Performed:
                 FireCannon();
@@ -76,7 +78,7 @@ public class ShipFiring : MonoBehaviour
                 break;
         }
 
-      
+
     }
 
 }
