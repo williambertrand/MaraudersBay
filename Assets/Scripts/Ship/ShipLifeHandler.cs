@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
@@ -20,8 +18,21 @@ public class ShipLifeHandler : MonoBehaviour {
     public string[] collidableTags;
     public GameObject[] spawnLocations;
 
+
+    [Tooltip("Set this for player health to show in UI")]
+    [SerializeField] private ShipHealthBar healthBar;
+
+    private ShipMovement movement;
+
     void Start() {
         Life = defaultLife;
+        if(healthBar != null)
+        {
+            healthBar.SetMaxHeath(defaultLife);
+        }
+        UpdateUI();
+
+        movement = GetComponent<ShipMovement>();
     }
 
     public bool ApplyDamage(int damage) {
@@ -29,6 +40,8 @@ public class ShipLifeHandler : MonoBehaviour {
             return false;
         
         Life -= damage;
+        Debug.Log("Taking damage: " + damage);
+        UpdateUI();
         return Life <= 0;
     }
 
@@ -55,9 +68,24 @@ public class ShipLifeHandler : MonoBehaviour {
     float CollisionDamageCalculator(float speed, float max) {
         return math.sin(math.clamp(speed, 1, max)/15.9f) * max;
     }
-    
-    void OnTriggerEnter(Collider collision) {
+
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collidableTags.Contains(collision.gameObject.tag))
-            Life -= (int)CollisionDamageCalculator(2, 25);
+        {
+            if (movement != null)
+            {
+                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 10));
+            }
+        }
+    }
+
+
+    private void UpdateUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.SetValue(Life);
+        }
     }
 }
