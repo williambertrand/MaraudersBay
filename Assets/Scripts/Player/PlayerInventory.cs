@@ -10,11 +10,22 @@ public class PlayerInventory : MonoBehaviour
     public int playerCurrentGold;
     [SerializeField] private TMP_Text playerGoldText;
 
+
+    // Cannon Ammo related fields and UI
+    [SerializeField] private int ammoStart;
+    public int ammoCurrent;
+    [SerializeField] private TMP_Text ammoText;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Set starting health
         playerCurrentGold = playerStartGold;
-        UpdateUI();
+        UpdateUI(playerGoldText, playerCurrentGold);
+
+        // Set starting ammo
+        ammoCurrent = ammoStart;
+        UpdateUI(ammoText, ammoCurrent);
     }
 
     // Update is called once per frame
@@ -26,14 +37,27 @@ public class PlayerInventory : MonoBehaviour
     public void OnGoldCollect(int amount)
     {
         playerCurrentGold += amount;
-        UpdateUI();
+        UpdateUI(playerGoldText, playerCurrentGold);
     }
 
-    private void UpdateUI()
+    private void UpdateUI(TMP_Text textField, int value)
     {
-        if (playerGoldText != null)
+        if (textField != null)
         {
-            playerGoldText.text = "" + playerCurrentGold;
+            textField.text = "" + value;
         }
+    }
+
+
+    // Return true on successfuly using up "amount" ammo
+    public bool ExpendAmmo(int amount)
+    {
+        if(ammoCurrent >= amount)
+        {
+            ammoCurrent -= amount;
+            UpdateUI(ammoText, ammoCurrent);
+            return true;
+        }
+        return false;
     }
 }
