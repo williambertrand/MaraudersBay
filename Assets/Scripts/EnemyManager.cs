@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
     public int currentEnemyCount;
     public int timeBetweenSpawn;
 
+    private int currentSpawnId = 0;
     public List<Enemy> enemies;
 
     public GameObject enemyPrefab;
@@ -57,7 +58,7 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        DropManager.Instance.SpawnGoaldAt(deadEnemy.gameObject.transform.position, deadEnemy.goldReward);
+        //DropManager.Instance.SpawnGoaldAt(deadEnemy.gameObject.transform.position, deadEnemy.goldReward);
 
         PlayerReputation rep = actor.GetComponent<PlayerReputation>();
         if (rep != null)
@@ -131,12 +132,25 @@ public class EnemyManager : MonoBehaviour
         {
             attempts++;
             posibleSpawn = GetSampleSpawn();
+
+            if (attempts > 5)
+            {
+                Debug.LogError("Could not find suitable loc for enemy spawn");
+                return;
+            }
         }
 
         Debug.Log("Got valid spawn loc after attemps: " + attempts);
         GameObject newEnemy = Instantiate(enemyPrefab, posibleSpawn, Quaternion.identity);
+        newEnemy.transform.parent = transform;
 
         Enemy enemyInfo = newEnemy.GetComponent<Enemy>();
         enemyInfo.health = CurrentSpawnHealth();
+
+        // Bit of a hack here to identify enemies
+        enemyInfo.id = currentSpawnId;
+        currentSpawnId++;
+
+        enemies.Add(enemyInfo);
     }
 }

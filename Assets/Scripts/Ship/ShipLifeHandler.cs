@@ -56,6 +56,7 @@ public class ShipLifeHandler : MonoBehaviour {
         if (enemyComponent != null)
         {
             enemyComponent.OnDeath(fromActor);
+            Destroy(gameObject);
         }
 
         // TODO: Initiate spawn sequence / cut scene here
