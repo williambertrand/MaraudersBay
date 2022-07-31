@@ -103,8 +103,6 @@ public class ShipFiring : MonoBehaviour
             default:
                 break;
         }
-
-
     }
 
 }

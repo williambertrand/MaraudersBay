@@ -40,8 +40,6 @@ public class ShipLifeHandler : MonoBehaviour {
         if (isInvincible)
             return;
 
-        Debug.Log(gameObject.name + " taking " + damage + " damage from: " + actor.name);
-
         Life -= damage;
         UpdateUI();
         if (Life <= 0)
