@@ -31,6 +31,13 @@ public class ShipMovement : MonoBehaviour
         rigidBody.MoveRotation(rigidBody.rotation * turnRotation);
         Vector3 movement = transform.forward * -1 * inputVertical * moveForce;
         rigidBody.AddForceAtPosition(movement, rigidBody.transform.position);
+
+        // Add a slight slow down force when turning
+        if (Mathf.Abs(turn) > 0f)
+        {
+            Debug.Log("TURN: " + turn);
+            rigidBody.AddForceAtPosition(rigidBody.velocity * -0.1f, rigidBody.transform.position);
+        }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
