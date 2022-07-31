@@ -15,6 +15,8 @@ public class EffectsManager : MonoBehaviour
 
     public GameObject SplashEffect;
 
+    public List<GameObject> explosions;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,13 @@ public class EffectsManager : MonoBehaviour
     public void SplashAt(Vector3 pos)
     {
         GameObject splash = Instantiate(SplashEffect, pos, Quaternion.identity);
-        splash.GetComponent<ParticleSystem>().Play();
+        splash.transform.localScale = Vector3.one * Random.Range(1.5f, 3.0f);
+    }
+
+    public void ExplosionAt(Vector3 pos)
+    {
+        GameObject explosionEffect = explosions[Random.Range(0, explosions.Count)];
+        GameObject exp = Instantiate(explosionEffect, pos, Quaternion.identity);
+        exp.transform.localScale = Vector3.one * Random.Range(1.5f, 3.0f);
     }
 }

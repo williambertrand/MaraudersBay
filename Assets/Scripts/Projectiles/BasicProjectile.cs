@@ -58,6 +58,8 @@ public class BasicProjectile : MonoBehaviour
                 return;
 
             lifeHandler.ApplyDamage(Damage, actor);
+            ContactPoint contact = collision.contacts[0];
+            EffectsManager.Instance.ExplosionAt(contact.point);
             Destroy(gameObject);
 
         } else if (collision.gameObject.CompareTag("Water"))
