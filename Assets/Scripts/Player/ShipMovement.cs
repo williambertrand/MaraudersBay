@@ -11,9 +11,6 @@ public class ShipMovement : MonoBehaviour
     public float turnSpeed;
     public float moveForce;
 
-    private Vector2 _moveInput;
-    //private PlayerActions playerActions;
-
 
     // Start is called before the first frame update
     void Start()
