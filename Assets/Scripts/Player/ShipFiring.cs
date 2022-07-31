@@ -59,21 +59,22 @@ public class ShipFiring : MonoBehaviour
 
         Transform initPoint = toFireSide == Side.PORT ? PORT_Firing : STARBOARD_Firing;
 
-        GameObject proj = Instantiate(projectile, initPoint.position, Quaternion.identity);
 
+        // Create projectile and set info
+        GameObject proj = Instantiate(projectile, initPoint.position, Quaternion.identity);
         proj.gameObject.tag = gameObject.tag;
 
+        BasicProjectile projectileInfo = proj.GetComponent<BasicProjectile>();
+        projectileInfo.actor = gameObject;
+
+        // Actually fire the cannon ball
         Rigidbody rb = proj.GetComponent<Rigidbody>();
-
-
         Vector3 accuracyOffset = new Vector3(
             Random.Range(-accuracyValue, accuracyValue),
             Random.Range(-accuracyValue, accuracyValue),
             0.0f
         );
-
         Vector3 aim = initPoint.transform.forward + accuracyOffset;
-
         rb.AddForce(firingPower * aim);
 
         // Swap firing to other side

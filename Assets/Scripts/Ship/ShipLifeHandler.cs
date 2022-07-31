@@ -10,10 +10,11 @@ public class ShipLifeHandler : MonoBehaviour {
         get { return _life;}
         set { 
             _life = value;
-            if (value <= 0) Die();
         }
     }
-    public int defaultLife = 100;
+
+
+    public int maxLife = 100;
     public bool isInvincible;
     public string[] collidableTags;
     public GameObject[] spawnLocations;
@@ -25,28 +26,41 @@ public class ShipLifeHandler : MonoBehaviour {
     private ShipMovement movement;
 
     void Start() {
-        Life = defaultLife;
+        Life = maxLife;
         if(healthBar != null)
         {
-            healthBar.SetMaxHeath(defaultLife);
+            healthBar.SetMaxHeath(maxLife);
         }
         UpdateUI();
 
         movement = GetComponent<ShipMovement>();
     }
 
-    public bool ApplyDamage(int damage) {
+    public void ApplyDamage(int damage, GameObject actor) {
         if (isInvincible)
-            return false;
-        
+            return;
+
+        Debug.Log(gameObject.name + " taking " + damage + " damage from: " + actor.name);
+
         Life -= damage;
-        Debug.Log("Taking damage: " + damage);
         UpdateUI();
-        return Life <= 0;
+        if (Life <= 0)
+        {
+            Die(actor);
+        }
     }
 
-    void Die() {
-        Life = defaultLife;
+    void Die(GameObject fromActor) {
+
+        Enemy enemyComponent = GetComponent<Enemy>();
+        if (enemyComponent != null)
+        {
+            enemyComponent.OnDeath(fromActor);
+            Destroy(gameObject);
+        }
+
+        // TODO: Initiate spawn sequence / cut scene here
+        Life = maxLife;
 
         GameObject nearest = null;
         var distance = float.MaxValue;
@@ -75,7 +89,7 @@ public class ShipLifeHandler : MonoBehaviour {
         {
             if (movement != null)
             {
-                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 10));
+                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 10), null);
             }
         }
     }

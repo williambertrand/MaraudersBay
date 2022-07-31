@@ -12,10 +12,15 @@ public class BasicProjectile : MonoBehaviour
 
     // Destroy after ball has sunk below this line
     [SerializeField] private float MIN_DEPTH = -5;
-    
-    [SerializeField] private int Damage = 25;
+
+    // Public to enable updating from player firing based on player stats
+    public int Damage = 25;
     [SerializeField] string[] validTargets;
-    
+
+
+    // Who fired this projectile
+    public GameObject actor;
+
     private float createdAt;
 
     // Start is called before the first frame update
@@ -44,8 +49,16 @@ public class BasicProjectile : MonoBehaviour
     // TODO: On colliding with enemy ship, deal damage
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
+            ShipLifeHandler lifeHandler = collision.gameObject.GetComponent<ShipLifeHandler>();
+
+            if (lifeHandler == null)
+                return;
+
+            lifeHandler.ApplyDamage(Damage, actor);
+            Destroy(gameObject);
 
         } else if (collision.gameObject.CompareTag("Water"))
         {
@@ -53,17 +66,5 @@ public class BasicProjectile : MonoBehaviour
             EffectsManager.Instance.SplashAt(contact.point);
             Destroy(gameObject);
         }
-    }
-
-    void OnTriggerEnter(Collider collision) {
-        if (!validTargets.Contains(collision.gameObject.tag))
-            return;
-        
-        ShipLifeHandler lifeHandler = collision.gameObject.GetComponent<ShipLifeHandler>();
-        
-        if (lifeHandler == null)
-            return;
-        
-        lifeHandler.ApplyDamage(Damage);
     }
 }
