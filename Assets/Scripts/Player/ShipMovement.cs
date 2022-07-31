@@ -35,7 +35,6 @@ public class ShipMovement : MonoBehaviour
         // Add a slight slow down force when turning
         if (Mathf.Abs(turn) > 0f)
         {
-            Debug.Log("TURN: " + turn);
             rigidBody.AddForceAtPosition(rigidBody.velocity * -0.1f, rigidBody.transform.position);
         }
     }

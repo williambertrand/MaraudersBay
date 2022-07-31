@@ -25,6 +25,8 @@ public class ShipFiring : MonoBehaviour
 
     [SerializeField] private float accuracyValue;
 
+    [SerializeField] private GameObject fireEffect;
+
     private Side toFireSide = Side.PORT;
 
     // Start is called before the first frame update
@@ -76,6 +78,11 @@ public class ShipFiring : MonoBehaviour
         );
         Vector3 aim = initPoint.transform.forward + accuracyOffset;
         rb.AddForce(firingPower * aim);
+
+        if (fireEffect != null)
+        {
+            Instantiate(fireEffect, initPoint.position, Quaternion.identity);
+        }
 
         // Swap firing to other side
         toFireSide = toFireSide == Side.PORT ? Side.STARBOARD : Side.PORT;
