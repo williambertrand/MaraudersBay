@@ -43,6 +43,9 @@ public class AiMoveAndShoot : MonoBehaviour
         }
         else
         {
+            //Rotate the enemy to attack position
+            rotateShipToAttackPosition(playerObj.transform.position);
+
             if (!alreadyAttacked)
             {
                 ///Attack code here
@@ -57,6 +60,17 @@ public class AiMoveAndShoot : MonoBehaviour
     private void resetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void rotateShipToAttackPosition(Vector3 newLocation) 
+    {
+        
+        //find the vector pointing from our position to the target
+        _direction = (newLocation - transform.position).normalized;
+        //create the rotation we need to be in to be side on to the target
+        _lookRotation = Quaternion.LookRotation(_direction) * Quaternion.Euler(0, 90, 0);
+        //rotate us over time according to speed until we are in the required rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * RotationSpeed);
     }
 
     private void moveShipTo(Vector3 newLocation)
