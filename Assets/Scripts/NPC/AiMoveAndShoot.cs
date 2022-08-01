@@ -26,6 +26,7 @@ public class AiMoveAndShoot : MonoBehaviour
         //If you want to find it by TAG. For this you have to make sure you give your player object the tag "Player".
         if (playerObj == null)
             playerObj = GameObject.FindGameObjectWithTag("Player");
+        shipFiring = GetComponent<ShipFiring>();
     }
 
     private void Update()
@@ -39,7 +40,10 @@ public class AiMoveAndShoot : MonoBehaviour
     {
         if (distanceToPlayer.magnitude > (attackRange * 10))
         {
-            moveShipTo(playerObj.transform.position);
+            // TODO: Making a note here to update this desired location
+            // to be a bit forward and to the side of the palyer ship,
+            // to simulate an enemy ship trying to broadside in order to attack
+            moveShipTowards(playerObj.transform.position);
         }
         else
         {
@@ -93,7 +97,7 @@ public class AiMoveAndShoot : MonoBehaviour
             return;
         }
 
-        moveShipTo(sailPoint);
+        moveShipTowards(sailPoint);
         Vector3 distanceTosailPoint = transform.position - sailPoint;
 
 

@@ -23,7 +23,7 @@ public class PlayerReputation : MonoBehaviour
 
     }
 
-    public void updateReputation(int amount)
+    public void updateReputationBy(int amount)
     {
         playerCurrentReputation += amount;
         UpdateUI();
