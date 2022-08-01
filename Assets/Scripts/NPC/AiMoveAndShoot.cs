@@ -77,7 +77,7 @@ public class AiMoveAndShoot : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * RotationSpeed);
     }
 
-    private void moveShipTo(Vector3 newLocation)
+    private void moveShipTowards(Vector3 newLocation)
     {
         //find the vector pointing from our position to the target
         _direction = (newLocation - transform.position).normalized;
