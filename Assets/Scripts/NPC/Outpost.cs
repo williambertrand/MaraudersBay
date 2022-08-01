@@ -36,7 +36,7 @@ public class Outpost : MonoBehaviour
                 canonModel.transform.position.y,
                 playerTarget.transform.position.z
             );
-            //canonModel.transform.LookAt(lookPoint);
+            canonModel.transform.LookAt(lookPoint);
             if(Time.time - reloadTime > lastFire)
             {
                 FireAtPlayer();

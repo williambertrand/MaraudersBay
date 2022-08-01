@@ -3083,7 +3083,7 @@ Transform:
   m_Children:
   - {fileID: 8424219175849185284}
   - {fileID: 430256913}
-  - {fileID: 1915658197}
+  - {fileID: 936822167}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3117,7 +3117,7 @@ MonoBehaviour:
   fireEffect: {fileID: 1793880329535160, guid: b287b69cd25b44f4fafc46daddba9419, type: 3}
   projectile: {fileID: 1483525473814899085, guid: 55ab5e998e44b4e1789855b1b5f80167,
     type: 3}
-  canonModel: {fileID: 1915290613}
+  canonModel: {fileID: 936822166}
   firePoint: {fileID: 1074432222}
   reloadTime: 1
   damage: 10
@@ -3538,6 +3538,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920611129}
   m_CullTransparentMesh: 1
+--- !u!1 &936822166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 936822167}
+  m_Layer: 0
+  m_Name: Cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &936822167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936822166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1915658197}
+  m_Father: {fileID: 874666127}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1001874440
 GameObject:
   m_ObjectHideFlags: 0
@@ -5748,16 +5780,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915290613}
-  m_LocalRotation: {x: -0, y: 0.99937713, z: -0, w: -0.03528874}
-  m_LocalPosition: {x: 6.5999985, y: 73.65988, z: 4.5}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 6.600006, y: 73.65988, z: 4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1915658199}
   - {fileID: 1074432222}
-  m_Father: {fileID: 874666127}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 184.045, z: 0}
+  m_Father: {fileID: 936822167}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!4 &1915658199
 Transform:
   m_ObjectHideFlags: 0
