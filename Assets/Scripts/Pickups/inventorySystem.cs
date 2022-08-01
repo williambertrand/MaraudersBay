@@ -29,6 +29,7 @@ public class inventorySystem : MonoBehaviour
 
     public void Add(inventoryItemData referenceData)
     {
+        Debug.Log(referenceData);
         if(m_itemDictionary.TryGetValue(referenceData, out inventoryItem value))
         {
             // Debug.Log("Adding to stack.");
