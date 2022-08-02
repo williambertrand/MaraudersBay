@@ -20,13 +20,18 @@ public class Outpost : MonoBehaviour
     [SerializeField] private float firingPower;
     private float lastFire;
 
-    // Start is called before the first frame update
+    // Using this flag allows the outpost to aim canons
+    // at the player ship even if it isn't firing
+    // for the case of outposts at ports
+    [Tooltip("Enable to fire at the player when in range")]
+    [SerializeField] private bool isActive = true;
+
     void Start()
     {
         GetComponent<SphereCollider>().radius = maxRange;
+        // Enabling firing by default
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (playerTarget != null)
@@ -37,6 +42,9 @@ public class Outpost : MonoBehaviour
                 playerTarget.transform.position.z
             );
             canonModel.transform.LookAt(lookPoint);
+
+            if (!isActive) return;
+
             if(Time.time - reloadTime > lastFire)
             {
                 FireAtPlayer();
@@ -99,5 +107,16 @@ public class Outpost : MonoBehaviour
         }
 
         lastFire = Time.time;
+    }
+
+
+    public void Activate()
+    {
+        isActive = true;
+    }
+
+    public void DeActivate()
+    {
+        isActive = false;
     }
 }
