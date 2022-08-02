@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,30 +8,67 @@ public class ShipLifeHandler : MonoBehaviour {
     [SerializeField]int _life = 100;
     int Life{
         get { return _life;}
-        set { 
+        set {
+            if (value > maxLife) value = maxLife; 
             _life = value;
-            if (value <= 0) Die();
+            UpdateUI();
+            UpdateDamageEffects();
         }
     }
-    public int defaultLife = 100;
+
+
+    public int maxLife = 100;
     public bool isInvincible;
     public string[] collidableTags;
     public GameObject[] spawnLocations;
 
+
+    [Tooltip("Set this for player health to show in UI")]
+    [SerializeField] private ShipHealthBar healthBar;
+
+    private ShipDamageEffects damageEffects;
+
+    private ShipMovement movement;
+
     void Start() {
-        Life = defaultLife;
+        Life = maxLife;
+        if(healthBar != null)
+        {
+            healthBar.SetMaxHeath(maxLife);
+        }
+        UpdateUI();
+
+        movement = GetComponent<ShipMovement>();
+        damageEffects = GetComponent<ShipDamageEffects>();
     }
 
-    public bool ApplyDamage(int damage) {
+    public void ApplyDamage(int damage, GameObject actor) {
         if (isInvincible)
-            return false;
-        
+            return;
+
         Life -= damage;
-        return Life <= 0;
+        if (Life <= 0)
+        {
+            Die(actor);
+        }
     }
 
-    void Die() {
-        Life = defaultLife;
+    public void ApplyRepair(int amount)
+    {
+        Life += amount;
+    }
+
+    void Die(GameObject fromActor) {
+
+        Enemy enemyComponent = GetComponent<Enemy>();
+        if (enemyComponent != null)
+        {
+            enemyComponent.OnDeath(fromActor);
+            Destroy(gameObject);
+        }
+
+        // TODO: Initiate spawn sequence / cut scene here
+        Life = maxLife;
 
         GameObject nearest = null;
         var distance = float.MaxValue;
@@ -55,9 +90,32 @@ public class ShipLifeHandler : MonoBehaviour {
     float CollisionDamageCalculator(float speed, float max) {
         return math.sin(math.clamp(speed, 1, max)/15.9f) * max;
     }
-    
-    void OnTriggerEnter(Collider collision) {
+
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collidableTags.Contains(collision.gameObject.tag))
-            Life -= (int)CollisionDamageCalculator(2, 25);
+        {
+            if (movement != null)
+            {
+                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 10), null);
+            }
+        }
+    }
+
+
+    private void UpdateUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.SetValue(Life);
+        }
+    }
+
+    private void UpdateDamageEffects()
+    {
+        if(damageEffects != null)
+        {
+            damageEffects.UpdateEffects((float) Life / maxLife);
+        }
     }
 }

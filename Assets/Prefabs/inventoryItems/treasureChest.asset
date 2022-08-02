@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae8325795e449b4da2f1802d9267548, type: 3}
+  m_Name: treasureChest
+  m_EditorClassIdentifier: 
+  id: treasureChest
+  displayName: Treasure Chest
+  icon: {fileID: 21300000, guid: 58692fd3a6ba8cc4183036ee0a35f2c6, type: 3}
+  prefab: {fileID: 100000, guid: f657936015b7b90489fd390dc2831618, type: 3}

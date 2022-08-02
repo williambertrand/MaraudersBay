@@ -14,8 +14,7 @@ public class DropManager : MonoBehaviour
     }
     #endregion
 
-    // TODO: Call on enemy ship death to drop gold at the ship location
-    void SpawnGoaldAt(Vector3 pos, int amount)
+    public void SpawnGoaldAt(Vector3 pos, int amount)
     {
         GameObject goldObj = Instantiate(goldDrop, pos, Quaternion.identity);
         GoldPickup pickup = goldObj.GetComponent<GoldPickup>();

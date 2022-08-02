@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoldPickup : MonoBehaviour
 {
 
     public int amount;
+    public bool shouldFloat;
 
     //Speed of pickup floating up/down
     [SerializeField] private float speed = 5f;
@@ -22,6 +21,8 @@ public class GoldPickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!shouldFloat) return;
+
         Vector3 pos = transform.position;
         float newY = Mathf.Sin(Time.time * speed) + startHeight;
         transform.position = new Vector3(pos.x, newY, pos.z) * height;
@@ -31,7 +32,7 @@ public class GoldPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
+            PlayerGoldAndAmmoInventory inventory = other.gameObject.GetComponent<PlayerGoldAndAmmoInventory>();
             if (inventory != null) inventory.OnGoldCollect(amount);
             Destroy(gameObject);
         }
