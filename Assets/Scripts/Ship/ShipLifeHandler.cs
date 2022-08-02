@@ -12,6 +12,7 @@ public class ShipLifeHandler : MonoBehaviour {
             if (value > maxLife) value = maxLife; 
             _life = value;
             UpdateUI();
+            UpdateDamageEffects();
         }
     }
 
@@ -25,6 +26,8 @@ public class ShipLifeHandler : MonoBehaviour {
     [Tooltip("Set this for player health to show in UI")]
     [SerializeField] private ShipHealthBar healthBar;
 
+    private ShipDamageEffects damageEffects;
+
     private ShipMovement movement;
 
     void Start() {
@@ -36,6 +39,7 @@ public class ShipLifeHandler : MonoBehaviour {
         UpdateUI();
 
         movement = GetComponent<ShipMovement>();
+        damageEffects = GetComponent<ShipDamageEffects>();
     }
 
     public void ApplyDamage(int damage, GameObject actor) {
@@ -104,6 +108,14 @@ public class ShipLifeHandler : MonoBehaviour {
         if (healthBar != null)
         {
             healthBar.SetValue(Life);
+        }
+    }
+
+    private void UpdateDamageEffects()
+    {
+        if(damageEffects != null)
+        {
+            damageEffects.UpdateEffects((float) Life / maxLife);
         }
     }
 }

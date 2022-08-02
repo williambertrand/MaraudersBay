@@ -31,7 +31,6 @@ public class PlayerReputation : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("UPDATE UI to: " +  playerCurrentReputation);
         if (playerReputationText != null)
         {
             playerReputationText.text = "" + playerCurrentReputation;
