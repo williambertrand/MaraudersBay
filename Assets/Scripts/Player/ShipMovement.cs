@@ -16,6 +16,7 @@ public class ShipMovement : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.maxAngularVelocity = 0;
     }
 
     // Update is called once per frame

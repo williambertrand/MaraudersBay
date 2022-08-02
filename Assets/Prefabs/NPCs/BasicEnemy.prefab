@@ -176,7 +176,7 @@ MonoBehaviour:
   health: 0
   enemyLife: {fileID: 0}
   goldReward: 0
-  reputationAward: 0
+  reputationAward: 1
 --- !u!114 &6805487847690538774
 MonoBehaviour:
   m_ObjectHideFlags: 0
