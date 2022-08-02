@@ -32,7 +32,7 @@ public class GoldPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
+            PlayerGoldAndAmmoInventory inventory = other.gameObject.GetComponent<PlayerGoldAndAmmoInventory>();
             if (inventory != null) inventory.OnGoldCollect(amount);
             Destroy(gameObject);
         }

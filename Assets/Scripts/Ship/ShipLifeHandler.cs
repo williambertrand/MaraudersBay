@@ -8,8 +8,10 @@ public class ShipLifeHandler : MonoBehaviour {
     [SerializeField]int _life = 100;
     int Life{
         get { return _life;}
-        set { 
+        set {
+            if (value > maxLife) value = maxLife; 
             _life = value;
+            UpdateUI();
         }
     }
 
@@ -41,11 +43,15 @@ public class ShipLifeHandler : MonoBehaviour {
             return;
 
         Life -= damage;
-        UpdateUI();
         if (Life <= 0)
         {
             Die(actor);
         }
+    }
+
+    public void ApplyRepair(int amount)
+    {
+        Life += amount;
     }
 
     void Die(GameObject fromActor) {

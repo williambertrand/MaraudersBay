@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerGoldAndAmmoInventory : MonoBehaviour
 {
 
     // Gold related fields and UI
@@ -40,6 +39,12 @@ public class PlayerInventory : MonoBehaviour
         UpdateUI(playerGoldText, playerCurrentGold);
     }
 
+    public void SpendGold(int amount)
+    {
+        playerCurrentGold -= amount;
+        UpdateUI(playerGoldText, playerCurrentGold);
+    }
+
     private void UpdateUI(TMP_Text textField, int value)
     {
         if (textField != null)
@@ -47,7 +52,6 @@ public class PlayerInventory : MonoBehaviour
             textField.text = "" + value;
         }
     }
-
 
     // Return true on successfuly using up "amount" ammo
     public bool ExpendAmmo(int amount)
@@ -59,5 +63,11 @@ public class PlayerInventory : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void AddAmmo(int amount)
+    {
+        ammoCurrent += amount;
+        UpdateUI(ammoText, ammoCurrent);
     }
 }
