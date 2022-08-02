@@ -13,7 +13,7 @@ public class ShipFiring : MonoBehaviour
     [Header("Fields for player vs ship controlled")]
     [SerializeField] private bool isPlayerControlled;
     [SerializeField] private bool isInventoryLimited;
-    private PlayerInventory inventory;
+    private PlayerGoldAndAmmoInventory inventory;
 
     [SerializeField] private Transform PORT_Firing;
     [SerializeField] private Transform STARBOARD_Firing;
@@ -34,7 +34,7 @@ public class ShipFiring : MonoBehaviour
     {
         if(isInventoryLimited)
         {
-            inventory = GetComponent<PlayerInventory>();
+            inventory = GetComponent<PlayerGoldAndAmmoInventory>();
             if (inventory == null)
             {
                 Debug.LogError("Inventory component required if ship has limited firing inventory");
@@ -104,5 +104,4 @@ public class ShipFiring : MonoBehaviour
                 break;
         }
     }
-
 }
