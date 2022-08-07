@@ -14,6 +14,8 @@ public class PlayfabAuthControlls: MonoBehaviour
 	[SerializeField] private TMP_InputField nameInput;
 	[SerializeField] private TMP_Text infoText;
 
+	[SerializeField] private GameObject playAsGuestButton;
+
 	private string userDisplayName;
 
 	private const string _PlayFabRememberMeIdKey = "MaraudersBayPlayFabId";
@@ -41,6 +43,8 @@ public class PlayfabAuthControlls: MonoBehaviour
     {
 		infoText.text = message;
 		infoText.gameObject.SetActive(true);
+		// hide guest button as it occupies same space
+		playAsGuestButton.gameObject.SetActive(false);
 		StartCoroutine(HideError());
 	}
 
@@ -48,6 +52,7 @@ public class PlayfabAuthControlls: MonoBehaviour
     {
 		yield return new WaitForSeconds(5.0f);
 		infoText.gameObject.SetActive(false);
+		playAsGuestButton.gameObject.SetActive(true);
 	}
 
 	public void RegisterPlayer()
