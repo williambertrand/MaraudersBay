@@ -14,6 +14,8 @@ public class EnemyManager : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private GameObject player;
+
     public int currentEnemyCount;
     public int timeBetweenSpawn;
 
@@ -85,21 +87,22 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-    public const float MIN_DIST_PLAYER = 50.0f;
-    public const float MIN_DIST_ENEMY = 20.0f;
+    public const float MIN_DIST_PLAYER = 200.0f;
+    public const float MIN_DIST_ENEMY = 100.0f;
 
     public bool validateSpawnLoc(Vector3 spawnLoc)
     {
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, 5f, 0), -Vector3.up, out hit))
+        if (Physics.Raycast(spawnLoc + new Vector3(0, 5f, 0), -Vector3.up, out hit))
         {
 
             // Check spawn loc is water
             if (!hit.collider.gameObject.CompareTag("Water")) return false;
 
             // Check spawn loc is not within X dist of player
-            if (Physics.OverlapSphere(hit.point, MIN_DIST_ENEMY, playerLayerMask).Length > 0)
+            Debug.Log("Sample dist: " + Vector3.Distance(hit.point, player.transform.position));
+            if (Physics.OverlapSphere(hit.point, MIN_DIST_PLAYER, playerLayerMask).Length > 0)
             {
                 return false;
             }
