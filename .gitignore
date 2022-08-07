@@ -71,7 +71,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+
 # Playfab auth
-Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
 **/PlayFabEditorPrefsSO.asset
 Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
+Assets/PlayFabEditorExtensions/Editor/Resources/*
