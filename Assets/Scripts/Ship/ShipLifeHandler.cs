@@ -67,24 +67,36 @@ public class ShipLifeHandler : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        // TODO: Initiate spawn sequence / cut scene here
-        Life = maxLife;
 
+        if (GetComponent<Player>() != null)
+        {
+            // Handle player death specific actions here
+
+            // Players lose all on ship items when sunk
+            inventorySystem.Instance.Clear();
+
+            //TODO: initiate spawn UI
+            //GameManager.Instance.OnPlayerDeath()
+        }
+    }
+
+    private GameObject GetNearestSpawnPoint()
+    {
         GameObject nearest = null;
         var distance = float.MaxValue;
-        
-        foreach (GameObject spawn in spawnLocations) {
+
+        foreach (GameObject spawn in spawnLocations)
+        {
             var newDis = Vector2.Distance(spawn.transform.position, transform.position);
-            
+
             if (nearest && !(newDis < distance))
                 continue;
-            
+
             nearest = spawn;
             distance = newDis;
         }
 
-        if (nearest)
-            transform.position = nearest.transform.position;
+        return nearest;
     }
     
     float CollisionDamageCalculator(float speed, float max) {
@@ -93,9 +105,6 @@ public class ShipLifeHandler : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        Debug.Log("Collision with: " + collision.gameObject.tag);
-        Debug.Log("Collision speed: " + movement.GetSpeedSqr());
 
         if (collidableTags.Contains(collision.gameObject.tag))
         {

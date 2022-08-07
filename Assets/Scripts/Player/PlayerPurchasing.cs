@@ -17,6 +17,10 @@ public class PlayerPurchasing : MonoBehaviour
     public int ammoCost;
     public int ammoValue;
 
+    [Header("Chest selling")]
+    public inventoryItemData chestItemData;
+    public int chestValue;
+
 
     void Start()
     {
@@ -48,5 +52,12 @@ public class PlayerPurchasing : MonoBehaviour
     public void OnSellChest()
     {
         // TODO: Hook up to actual inventory for getting chest count and selling
+        int playerChestCount = inventorySystem.Instance.GetCount(chestItemData);
+
+        if(playerChestCount > 0)
+        {
+            inventorySystem.Instance.Remove(chestItemData);
+            playerInventory.OnGoldCollect(chestValue);
+        }
     }
 }

@@ -51,7 +51,7 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void OnEnemyDeath(int id, GameObject actor)
+    public void OnEnemyDeath(int id, GameObject actor, Vector3 pos)
     {
         Enemy deadEnemy = enemies.Find(e => e.id == id);
         if(deadEnemy == null)
@@ -60,7 +60,7 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        //DropManager.Instance.SpawnGoaldAt(deadEnemy.gameObject.transform.position, deadEnemy.goldReward);
+        DropManager.Instance.SpawnChestAt(pos);
 
         PlayerReputation rep = actor.GetComponent<PlayerReputation>();
         if (rep != null)

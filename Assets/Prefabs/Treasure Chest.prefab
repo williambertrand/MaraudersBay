@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &838339013699566213
+--- !u!1 &6128880592311252730
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 838339013699856037}
-  - component: {fileID: 838339013698528901}
-  - component: {fileID: 838339013697561669}
+  - component: {fileID: 6128880592311252731}
+  - component: {fileID: 6128880592311252705}
+  - component: {fileID: 6128880592311252710}
+  - component: {fileID: 6128880592311252711}
+  - component: {fileID: 6128880592311252709}
+  - component: {fileID: 6128880592311252708}
   m_Layer: 0
-  m_Name: lid
+  m_Name: Treasure Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &838339013699856037
+--- !u!4 &6128880592311252731
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566213}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 5.15, z: 2.646}
+  m_GameObject: {fileID: 6128880592311252730}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -447.75, y: -426.75, z: -86.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 838339013699856039}
+  m_Children:
+  - {fileID: 6128880593542607779}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &838339013698528901
+--- !u!33 &6128880592311252705
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566213}
-  m_Mesh: {fileID: 4300002, guid: f657936015b7b90489fd390dc2831618, type: 3}
---- !u!23 &838339013697561669
+  m_GameObject: {fileID: 6128880592311252730}
+  m_Mesh: {fileID: 4300000, guid: f657936015b7b90489fd390dc2831618, type: 3}
+--- !u!23 &6128880592311252710
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566213}
+  m_GameObject: {fileID: 6128880592311252730}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,7 +88,50 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &838339013699566215
+--- !u!65 &6128880592311252711
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128880592311252730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.15, y: 8.469206, z: 6.332252}
+  m_Center: {x: 0, y: 4.234603, z: -0.016125917}
+--- !u!114 &6128880592311252709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128880592311252730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73525537ab703eb40bfd93d5ca585bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceItem: {fileID: 11400000, guid: e524bb8a1e686f94ea2df75d82df5281, type: 2}
+--- !u!114 &6128880592311252708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128880592311252730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9750497b8a8eff04699c68cf1a7d4185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldFloat: 0
+  item: {fileID: 6128880592311252709}
+  speed: 5
+  height: 0.5
+  startHeight: 1
+--- !u!1 &6128880593542607776
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,47 +139,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 838339013699856039}
-  - component: {fileID: 838339013698528903}
-  - component: {fileID: 838339013697561671}
+  - component: {fileID: 6128880593542607779}
+  - component: {fileID: 6128880593542607789}
+  - component: {fileID: 6128880593542607778}
   m_Layer: 0
-  m_Name: Treasure Chest
+  m_Name: lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &838339013699856039
+--- !u!4 &6128880593542607779
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566215}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 6128880593542607776}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 5.15, z: 2.646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 838339013699856037}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 6128880592311252731}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &838339013698528903
+--- !u!33 &6128880593542607789
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566215}
-  m_Mesh: {fileID: 4300000, guid: f657936015b7b90489fd390dc2831618, type: 3}
---- !u!23 &838339013697561671
+  m_GameObject: {fileID: 6128880593542607776}
+  m_Mesh: {fileID: 4300002, guid: f657936015b7b90489fd390dc2831618, type: 3}
+--- !u!23 &6128880593542607778
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838339013699566215}
+  m_GameObject: {fileID: 6128880593542607776}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

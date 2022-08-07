@@ -54,7 +54,7 @@ public class EffectsManager : MonoBehaviour
         {
             GameObject effect = shipExplosionEffects[Random.Range(0, shipExplosionEffects.Count)];
             GameObject exp = Instantiate(effect, pos, Quaternion.identity);
-            exp.transform.localScale = Vector3.one * Random.Range(15f, 30f);
+            exp.transform.localScale = Vector3.one * Random.Range(10f, 20f);
         }
     }
 }
