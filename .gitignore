@@ -74,3 +74,4 @@ crashlytics-build.properties
 # Playfab auth
 Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
 **/PlayFabEditorPrefsSO.asset
+Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset
