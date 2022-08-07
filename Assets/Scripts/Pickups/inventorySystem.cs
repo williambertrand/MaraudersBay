@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class inventorySystem : MonoBehaviour
 {
-    public static inventorySystem current;
     private Dictionary<inventoryItemData, inventoryItem> m_itemDictionary;
     public List<inventoryItem> inventory; //{get; private set;}
     public delegate void inventoryChangedEvent();
     public static event inventoryChangedEvent OnInventoryChangedEvent;
 
+
+    #region Singleton
+    public static inventorySystem Instance;
     private void Awake() 
     {
-        current = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+    #endregion
+
+    private void Start()
+    {
         inventory = new List<inventoryItem>();
         m_itemDictionary = new Dictionary<inventoryItemData, inventoryItem>();
-        if(OnInventoryChangedEvent != null) OnInventoryChangedEvent();
+        if (OnInventoryChangedEvent != null) OnInventoryChangedEvent();
     }
 
     public inventoryItem Get(inventoryItemData referenceData)
@@ -27,17 +37,23 @@ public class inventorySystem : MonoBehaviour
         return null;
     }
 
+    public int GetCount(inventoryItemData referenceData)
+    {
+        if (m_itemDictionary.TryGetValue(referenceData, out inventoryItem value))
+        {
+            return value.stackSize;
+        }
+        return 0;
+    }
+
     public void Add(inventoryItemData referenceData)
     {
-        Debug.Log(referenceData);
         if(m_itemDictionary.TryGetValue(referenceData, out inventoryItem value))
         {
-            // Debug.Log("Adding to stack.");
             value.addToStack();
         }
         else
         {
-            // Debug.Log("Adding new item.");
             inventoryItem newItem = new inventoryItem(referenceData);
             inventory.Add(newItem);
             m_itemDictionary.Add(referenceData, newItem);
@@ -59,6 +75,22 @@ public class inventorySystem : MonoBehaviour
             }
             if(OnInventoryChangedEvent != null) OnInventoryChangedEvent();
         }
+    }
+
+    public void RemoveAll(inventoryItemData referenceData)
+    {
+        if (m_itemDictionary.TryGetValue(referenceData, out inventoryItem value))
+        {
+            inventory.Remove(value);
+            m_itemDictionary.Remove(referenceData);
+            if (OnInventoryChangedEvent != null) OnInventoryChangedEvent();
+        }
+    }
+
+    public void Clear()
+    {
+        inventory.Clear();
+        m_itemDictionary.Clear();
     }
 
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class itemObject : MonoBehaviour
@@ -8,8 +6,7 @@ public class itemObject : MonoBehaviour
 
     public void onHandlePickupItem()
     {
-        Debug.Log("onHandlePickupItem running");
-        inventorySystem.current.Add(referenceItem);
+        inventorySystem.Instance.Add(referenceItem);
         Destroy(gameObject);
     }
 }

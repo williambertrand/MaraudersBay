@@ -25,9 +25,7 @@ public class itemPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player collided with treasure chest");
             item.onHandlePickupItem();
-            // Destroy(gameObject);
         }
     }
 }

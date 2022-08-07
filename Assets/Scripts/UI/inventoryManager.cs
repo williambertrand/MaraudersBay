@@ -29,7 +29,7 @@ public class inventoryManager : MonoBehaviour
 
     public void DrawInventory()
     {
-        foreach(inventoryItem item in inventorySystem.current.inventory)
+        foreach(inventoryItem item in inventorySystem.Instance.inventory)
         {
             AddInventorySlot(item);
         }

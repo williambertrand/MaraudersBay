@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     public void OnDeath(GameObject actor)
     {
-        EnemyManager.Instance.OnEnemyDeath(id, actor);
+        EnemyManager.Instance.OnEnemyDeath(id, actor, transform.position);
         EffectsManager.Instance.ShipSinkEffectAt(new Vector3(transform.position.x, 15.0f, transform.position.z));
     }
 }
