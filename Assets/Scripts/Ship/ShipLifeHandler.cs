@@ -93,11 +93,16 @@ public class ShipLifeHandler : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        Debug.Log("Collision with: " + collision.gameObject.tag);
+        Debug.Log("Collision speed: " + movement.GetSpeedSqr());
+
         if (collidableTags.Contains(collision.gameObject.tag))
         {
             if (movement != null)
             {
-                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 10), null);
+                if (movement.GetSpeedSqr() < 5.0f) return;
+                ApplyDamage((int)CollisionDamageCalculator(movement.GetSpeedSqr(), 20), null);
             }
         }
     }

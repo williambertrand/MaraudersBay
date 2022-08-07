@@ -101,7 +101,6 @@ public class EnemyManager : MonoBehaviour
             if (!hit.collider.gameObject.CompareTag("Water")) return false;
 
             // Check spawn loc is not within X dist of player
-            Debug.Log("Sample dist: " + Vector3.Distance(hit.point, player.transform.position));
             if (Physics.OverlapSphere(hit.point, MIN_DIST_PLAYER, playerLayerMask).Length > 0)
             {
                 return false;
