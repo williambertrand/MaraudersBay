@@ -1,33 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum Side
+{
+    PORT,
+    STARBOARD
+}
+
+[System.Serializable]
+public class Cannon
+{
+    public string name;
+    public bool enabled { get; set; } = false;
+    public Transform initPoint;
+}
+
 public class ShipFiring : MonoBehaviour
 {
-
-    public enum Side
-    {
-        PORT,
-        STARBOARD
-    }
 
     [Header("Fields for player vs ship controlled")]
     [SerializeField] private bool isPlayerControlled;
     [SerializeField] private bool isInventoryLimited;
     private PlayerGoldAndAmmoInventory inventory;
 
-    [SerializeField] private Transform PORT_Firing;
-    [SerializeField] private Transform STARBOARD_Firing;
+    [SerializeField] private List<Cannon> PORT_Cannons;
+    [SerializeField] private List<Cannon> STARBOARD_Cannons;
+    public List<Cannon> allCannons;
+
     [SerializeField] private GameObject projectile;
     [SerializeField] private float firingPower;
 
     [SerializeField] private float reloadTime;
-    private float lastFireTime;
+    private Dictionary<Side, float> lastFireTimes;
 
     [SerializeField] private float accuracyValue;
 
     [SerializeField] private GameObject fireEffect;
-
-    private Side toFireSide = Side.PORT;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +49,25 @@ public class ShipFiring : MonoBehaviour
                 Debug.LogError("Inventory component required if ship has limited firing inventory");
             }
         }
+
+        lastFireTimes = new Dictionary<Side, float>();
+        lastFireTimes.Add(Side.PORT, 0.0f);
+        lastFireTimes.Add(Side.STARBOARD, 0.0f);
+
+        allCannons = new List<Cannon>();
+        for(int i = 0; i < PORT_Cannons.Count; i++)
+        {
+            allCannons.Add(PORT_Cannons[i]);
+        }
+        for (int i = 0; i < STARBOARD_Cannons.Count; i++)
+        {
+            allCannons.Add(STARBOARD_Cannons[i]);
+        }
+
+
+        // Begin with 1 cannon enabled on each side of ship
+        PORT_Cannons[0].enabled = true;
+        STARBOARD_Cannons[0].enabled = true;
     }
 
     // Update is called once per frame
@@ -48,49 +76,51 @@ public class ShipFiring : MonoBehaviour
 
     }
 
-    public void FireCannon()
+    public void FireCannons(Side fireSide)
     {
 
-        if (Time.time - lastFireTime <= reloadTime) return;
+        if (Time.time - lastFireTimes[fireSide] <= reloadTime) return;
 
-        if (isInventoryLimited)
+        List<Cannon> cannonsToFire = fireSide == Side.PORT ? PORT_Cannons : STARBOARD_Cannons;
+
+
+        foreach(Cannon cannon in cannonsToFire)
         {
-            bool canFire = inventory.ExpendAmmo(1);
-            if (!canFire) return;
+            if (!cannon.enabled) continue;
+
+            if (isInventoryLimited)
+            {
+                bool canFire = inventory.ExpendAmmo(1);
+                if (!canFire) break;
+            }
+
+            // Create projectile and set info
+            GameObject proj = Instantiate(projectile, cannon.initPoint.position, Quaternion.identity);
+            proj.gameObject.tag = gameObject.tag;
+
+            BasicProjectile projectileInfo = proj.GetComponent<BasicProjectile>();
+            projectileInfo.actor = gameObject;
+
+            // Actually fire the cannon ball
+            Rigidbody rb = proj.GetComponent<Rigidbody>();
+            Vector3 accuracyOffset = new Vector3(
+                Random.Range(-accuracyValue, accuracyValue),
+                Random.Range(-accuracyValue, accuracyValue),
+                0.0f
+            );
+            Vector3 aim = cannon.initPoint.transform.forward + accuracyOffset;
+            rb.AddForce(firingPower * aim);
+
+            if (fireEffect != null)
+            {
+                Instantiate(fireEffect, cannon.initPoint.position, Quaternion.identity);
+            }
         }
 
-        Transform initPoint = toFireSide == Side.PORT ? PORT_Firing : STARBOARD_Firing;
-
-
-        // Create projectile and set info
-        GameObject proj = Instantiate(projectile, initPoint.position, Quaternion.identity);
-        proj.gameObject.tag = gameObject.tag;
-
-        BasicProjectile projectileInfo = proj.GetComponent<BasicProjectile>();
-        projectileInfo.actor = gameObject;
-
-        // Actually fire the cannon ball
-        Rigidbody rb = proj.GetComponent<Rigidbody>();
-        Vector3 accuracyOffset = new Vector3(
-            Random.Range(-accuracyValue, accuracyValue),
-            Random.Range(-accuracyValue, accuracyValue),
-            0.0f
-        );
-        Vector3 aim = initPoint.transform.forward + accuracyOffset;
-        rb.AddForce(firingPower * aim);
-
-        if (fireEffect != null)
-        {
-            Instantiate(fireEffect, initPoint.position, Quaternion.identity);
-        }
-
-        // Swap firing to other side
-        toFireSide = toFireSide == Side.PORT ? Side.STARBOARD : Side.PORT;
-
-        lastFireTime = Time.time;
+        lastFireTimes[fireSide] = Time.time;
     }
 
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnFirePort(InputAction.CallbackContext context)
     {
 
         if (!isPlayerControlled) return;
@@ -98,10 +128,30 @@ public class ShipFiring : MonoBehaviour
         switch (context.phase)
         {
             case InputActionPhase.Performed:
-                FireCannon();
+                FireCannons(Side.PORT);
                 break;
             default:
                 break;
         }
+    }
+
+    public void OnFireStarboard(InputAction.CallbackContext context)
+    {
+
+        if (!isPlayerControlled) return;
+
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                FireCannons(Side.STARBOARD);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void EnableCannon(int i)
+    {
+        allCannons[i].enabled = true;
     }
 }

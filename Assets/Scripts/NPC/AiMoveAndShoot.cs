@@ -52,8 +52,13 @@ public class AiMoveAndShoot : MonoBehaviour
 
             if (!alreadyAttacked)
             {
-                ///Attack code here
-                shipFiring.FireCannon();
+                Debug.Log("Firing with vector" + (playerObj.transform.position - transform.position));
+                // TODO: determine port vs starboard
+                Side fireSide = Side.PORT;
+
+                //Attack code here
+                shipFiring.FireCannons(fireSide);
+
 
                 alreadyAttacked = true;
                 Invoke(nameof(resetAttack), timeBetweenAttacks);

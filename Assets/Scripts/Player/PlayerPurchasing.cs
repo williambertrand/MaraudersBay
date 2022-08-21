@@ -21,11 +21,18 @@ public class PlayerPurchasing : MonoBehaviour
     public inventoryItemData chestItemData;
     public int chestValue;
 
+    [Header("Cannons Purchasing")]
+    public List<GameObject> canonPurchasingButtons;
+    public ShipFiring playerShipFiring;
+    public int cannonCost;
+
 
     void Start()
     {
         lifeHandler = GetComponent<ShipLifeHandler>();
         playerInventory = GetComponent<PlayerGoldAndAmmoInventory>();
+        playerShipFiring = GetComponent<ShipFiring>();
+        UpdateCannonUI();
     }
 
 
@@ -58,6 +65,43 @@ public class PlayerPurchasing : MonoBehaviour
         {
             inventorySystem.Instance.Remove(chestItemData);
             playerInventory.OnGoldCollect(chestValue);
+        }
+    }
+
+    public void OnPurchaseCannon(int index)
+    {
+        if(index >= playerShipFiring.allCannons.Count)
+        {
+            Debug.LogError("Index to buy cannon out of bounds");
+            return;
+        }
+        Cannon cannonToBuy = playerShipFiring.allCannons[index];
+
+        if(cannonToBuy.enabled)
+        {
+            return;
+        }
+
+        if (playerInventory.playerCurrentGold >= cannonCost)
+        {
+            playerInventory.SpendGold(ammoCost);
+            playerShipFiring.EnableCannon(index);
+            UpdateCannonUI();
+        }
+    }
+
+    private void UpdateCannonUI()
+    {
+        for(int  i = 0; i < canonPurchasingButtons.Count; i++)
+        {
+            if(playerShipFiring.allCannons[i].enabled)
+            {
+                Transform openIcon = canonPurchasingButtons[i].transform.Find("Open");
+                openIcon.gameObject.SetActive(false);
+
+                Transform checkedIcon = canonPurchasingButtons[i].transform.Find("Checked");
+                checkedIcon.gameObject.SetActive(true);
+            }
         }
     }
 }
