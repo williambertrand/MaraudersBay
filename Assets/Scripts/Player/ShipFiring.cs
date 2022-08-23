@@ -65,9 +65,18 @@ public class ShipFiring : MonoBehaviour
         }
 
 
-        // Begin with 1 cannon enabled on each side of ship
+        // Player begins with 1 cannon enabled on each side of ship
         PORT_Cannons[0].enabled = true;
         STARBOARD_Cannons[0].enabled = true;
+
+        // Enable all canons on an enemy ship
+        if (!isPlayerControlled)
+        {
+            for (int i = 0; i < allCannons.Count; i++)
+            {
+                allCannons[i].enabled = true;
+            }
+        }
     }
 
     // Update is called once per frame

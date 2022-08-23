@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
     private int currentSpawnId = 0;
     public List<Enemy> enemies;
 
-    public GameObject enemyPrefab;
+    public List<GameObject> enemyPrefabs;
     public PlayerReputation playerRep;
     public LayerMask enemyLayerMask;
     public LayerMask playerLayerMask;
@@ -142,7 +142,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Got valid spawn loc after attemps: " + attempts);
+        GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         GameObject newEnemy = Instantiate(enemyPrefab, posibleSpawn, Quaternion.identity);
         newEnemy.transform.parent = transform;
 

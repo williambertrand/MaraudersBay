@@ -139,8 +139,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerControlled: 0
   isInventoryLimited: 0
-  PORT_Firing: {fileID: 7904714310185319587}
-  STARBOARD_Firing: {fileID: 7904714311119263084}
+  PORT_Cannons:
+  - name: 
+    initPoint: {fileID: 7904714310185319587}
+  STARBOARD_Cannons:
+  - name: 
+    initPoint: {fileID: 7904714311119263084}
+  allCannons: []
   projectile: {fileID: 1483525473814899085, guid: 55ab5e998e44b4e1789855b1b5f80167,
     type: 3}
   firingPower: 4000
