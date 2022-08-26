@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
+
 public class ShipLifeHandler : MonoBehaviour {
     
     [SerializeField]int _life = 100;
@@ -20,7 +21,6 @@ public class ShipLifeHandler : MonoBehaviour {
     public int maxLife = 100;
     public bool isInvincible;
     public string[] collidableTags;
-    public GameObject[] spawnLocations;
 
 
     [Tooltip("Set this for player health to show in UI")]
@@ -71,32 +71,11 @@ public class ShipLifeHandler : MonoBehaviour {
         if (GetComponent<Player>() != null)
         {
             // Handle player death specific actions here
-
             // Players lose all on ship items when sunk
             inventorySystem.Instance.Clear();
 
-            //TODO: initiate spawn UI
-            //GameManager.Instance.OnPlayerDeath()
+            GameManager.Instance.OnPlayerDeath();
         }
-    }
-
-    private GameObject GetNearestSpawnPoint()
-    {
-        GameObject nearest = null;
-        var distance = float.MaxValue;
-
-        foreach (GameObject spawn in spawnLocations)
-        {
-            var newDis = Vector2.Distance(spawn.transform.position, transform.position);
-
-            if (nearest && !(newDis < distance))
-                continue;
-
-            nearest = spawn;
-            distance = newDis;
-        }
-
-        return nearest;
     }
     
     float CollisionDamageCalculator(float speed, float max) {
@@ -131,5 +110,15 @@ public class ShipLifeHandler : MonoBehaviour {
         {
             damageEffects.UpdateEffects((float) Life / maxLife);
         }
+    }
+
+    public void Reset()
+    {
+        Life = maxLife;
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHeath(maxLife);
+        }
+        UpdateUI();
     }
 }

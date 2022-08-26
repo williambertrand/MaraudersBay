@@ -139,13 +139,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerControlled: 0
   isInventoryLimited: 0
-  PORT_Firing: {fileID: 7904714310185319587}
-  STARBOARD_Firing: {fileID: 7904714311119263084}
+  PORT_Cannons:
+  - name: 
+    initPoint: {fileID: 7904714310185319587}
+  STARBOARD_Cannons:
+  - name: 
+    initPoint: {fileID: 7904714311119263084}
+  allCannons: []
   projectile: {fileID: 1483525473814899085, guid: 55ab5e998e44b4e1789855b1b5f80167,
     type: 3}
   firingPower: 4000
-  reloadTime: 0.1
-  accuracyValue: 0.3
+  reloadTime: 0.5
+  accuracyValue: 0.2
   fireEffect: {fileID: 0}
 --- !u!114 &-8449727216948272470
 MonoBehaviour:
@@ -163,7 +168,6 @@ MonoBehaviour:
   maxLife: 100
   isInvincible: 0
   collidableTags: []
-  spawnLocations: []
   healthBar: {fileID: 0}
 --- !u!114 &-2112431240313375028
 MonoBehaviour:
@@ -178,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  health: 0
+  health: 100
   enemyLife: {fileID: 0}
   goldReward: 0
   reputationAward: 1
@@ -198,7 +202,6 @@ MonoBehaviour:
   maxLife: 100
   isInvincible: 0
   collidableTags: []
-  spawnLocations: []
   healthBar: {fileID: 0}
 --- !u!114 &7081625300370866084
 MonoBehaviour:

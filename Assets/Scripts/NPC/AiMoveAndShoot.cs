@@ -52,8 +52,27 @@ public class AiMoveAndShoot : MonoBehaviour
 
             if (!alreadyAttacked)
             {
-                ///Attack code here
-                shipFiring.FireCannon();
+
+                // Determine port vs starboard
+                // if VectorResult.X < 0, firing port, else starboard
+                Vector3 VectorResult;
+                float DotResult = Vector3.Dot(transform.forward, playerObj.transform.forward);
+                if (DotResult > 0)
+                {
+                    VectorResult = transform.forward + playerObj.transform.forward;
+                }
+                else
+                {
+                    VectorResult = transform.forward - playerObj.transform.forward;
+                }
+
+                // Currently a ship will always rotate to put the
+                // player on the starboard side, even if that is a longer turn
+                Side fireSide = Side.STARBOARD;
+
+                //Attack code here
+                shipFiring.FireCannons(fireSide);
+
 
                 alreadyAttacked = true;
                 Invoke(nameof(resetAttack), timeBetweenAttacks);

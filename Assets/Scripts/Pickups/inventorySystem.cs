@@ -91,6 +91,7 @@ public class inventorySystem : MonoBehaviour
     {
         inventory.Clear();
         m_itemDictionary.Clear();
+        if (OnInventoryChangedEvent != null) OnInventoryChangedEvent();
     }
 
 }
