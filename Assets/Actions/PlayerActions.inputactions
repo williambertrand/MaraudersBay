@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraToggle",
+                    "type": "Button",
+                    "id": "ab088300-80a1-4a23-9e7d-37ad3d594072",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -186,11 +195,33 @@
                 },
                 {
                     "name": "",
+                    "id": "d401463d-afe6-4786-bd61-1287b6ebc4b2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9a4f2f76-cfa8-4e6e-90f1-120726720ef6",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "FirePort",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a69581c5-3625-4562-a4be-fd837e0c2608",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "FirePort",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -203,6 +234,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "FireStarboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afe615e9-84ba-4ba8-b7c2-2cbcd3d06b0a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "FireStarboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f942251e-c9f4-45d2-8f75-f9b018e10ddb",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3055213-f95b-40fb-bb0b-7539a1a47e40",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CameraToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

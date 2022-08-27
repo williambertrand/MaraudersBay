@@ -64,7 +64,7 @@ public class Outpost : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerTarget = other.gameObject;
+            playerTarget = null;
         }
     }
 

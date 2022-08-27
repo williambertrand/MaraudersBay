@@ -38,6 +38,8 @@ public class ShipFiring : MonoBehaviour
 
     [SerializeField] private GameObject fireEffect;
 
+    private bool isActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +79,7 @@ public class ShipFiring : MonoBehaviour
                 allCannons[i].enabled = true;
             }
         }
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -87,7 +90,6 @@ public class ShipFiring : MonoBehaviour
 
     public void FireCannons(Side fireSide)
     {
-
         if (Time.time - lastFireTimes[fireSide] <= reloadTime) return;
 
         List<Cannon> cannonsToFire = fireSide == Side.PORT ? PORT_Cannons : STARBOARD_Cannons;
@@ -133,6 +135,7 @@ public class ShipFiring : MonoBehaviour
     {
 
         if (!isPlayerControlled) return;
+        if (!isActive) return;
 
         switch (context.phase)
         {
@@ -148,6 +151,7 @@ public class ShipFiring : MonoBehaviour
     {
 
         if (!isPlayerControlled) return;
+        if (!isActive) return;
 
         switch (context.phase)
         {
@@ -162,5 +166,10 @@ public class ShipFiring : MonoBehaviour
     public void EnableCannon(int i)
     {
         allCannons[i].enabled = true;
+    }
+
+    public void SetActive(bool active)
+    {
+        isActive = active;
     }
 }

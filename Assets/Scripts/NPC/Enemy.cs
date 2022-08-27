@@ -29,5 +29,11 @@ public class Enemy : MonoBehaviour
     {
         EnemyManager.Instance.OnEnemyDeath(id, actor, transform.position);
         EffectsManager.Instance.ShipSinkEffectAt(new Vector3(transform.position.x, 15.0f, transform.position.z));
+        // TODO: Could just sum up kills during gameplay and submit one update on death or
+        // on player quiting game
+        PlayfabStatsController.Instance.UpdatePlayerStatistic("kills", 1, () =>
+        {
+            Debug.Log("Updated player kill count stat");
+        });
     }
 }

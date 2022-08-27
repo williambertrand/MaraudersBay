@@ -174,6 +174,7 @@ public class PlayfabAuthControlls: MonoBehaviour
 	{
 		userDisplayName = result.AccountInfo.TitleInfo.DisplayName;
 		GameMenuText.greetingText = GameMenuText.greetingText.Replace("<name>", userDisplayName);
+		PlayfabContext.isActive = true;
 		ProceedToGame();
 	}
 
