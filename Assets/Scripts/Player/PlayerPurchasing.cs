@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerPurchasing : MonoBehaviour
 {
@@ -12,19 +13,23 @@ public class PlayerPurchasing : MonoBehaviour
     [Header("Ship Purchasing and Selling")]
     public int repairCost;
     public int repairValue;
+    public TMP_Text repairText;
 
     [Header("Ammo purhasing")]
     public int ammoCost;
     public int ammoValue;
+    public TMP_Text ammoText;
 
     [Header("Chest selling")]
     public inventoryItemData chestItemData;
     public int chestValue;
+    public TMP_Text chestText;
 
     [Header("Cannons Purchasing")]
     public List<GameObject> canonPurchasingButtons;
     public ShipFiring playerShipFiring;
     public int cannonCost;
+    public TMP_Text cannonText;
 
 
     void Start()
@@ -33,8 +38,17 @@ public class PlayerPurchasing : MonoBehaviour
         playerInventory = GetComponent<PlayerGoldAndAmmoInventory>();
         playerShipFiring = GetComponent<ShipFiring>();
         UpdateCannonUI();
+
+        InitUIValues();
     }
 
+    private void InitUIValues()
+    {
+        repairText.text = "Repair ship for " + repairCost + " gold.";
+        ammoText.text = "Purchase a cannon ball for " + ammoCost + " gold.";
+        cannonText.text = "Select an available slot to purchase a cannon for " + cannonCost + " gold";
+        chestText.text = "Sell a chest for " + chestValue + " gold";
+    }
 
 
     public void OnPurchaseRepair()
