@@ -98,7 +98,7 @@ public class PlayerPurchasing : MonoBehaviour
 
         if (playerInventory.playerCurrentGold >= cannonCost)
         {
-            playerInventory.SpendGold(ammoCost);
+            playerInventory.SpendGold(cannonCost);
             playerShipFiring.EnableCannon(index);
             UpdateCannonUI();
         }
